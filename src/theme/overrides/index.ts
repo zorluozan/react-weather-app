@@ -5,7 +5,7 @@ import Typography from "./Typography";
 export default function ComponentsOverrides(theme: Theme) {
   return Object.assign(
     // Link(theme),
-    Input(theme),
+    Input(),
     Typography(theme),
     // Card(theme)
     {}

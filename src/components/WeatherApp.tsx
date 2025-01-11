@@ -14,6 +14,7 @@ import TodayOverview from "./TodayOverview";
 import useTodayWeather from "../hooks/useTodayWeather";
 import useForecastWeather from "../hooks/useForecastWeather";
 import { ForecastWeather } from "../@types/forecastWeather";
+import NextDaysWeather from "./NextDaysWeather";
 
 const WeatherApp = () => {
   const [cityName, setCityName] = useState<string>("");
@@ -98,10 +99,13 @@ const WeatherApp = () => {
         (isLoading || isForecastLoading ? (
           <CircularProgress />
         ) : (
-          <TodayOverview
-            currentWeather={currentWeather}
-            currentForecastWeather={currentForecastWeather}
-          />
+          <>
+            <TodayOverview
+              currentWeather={currentWeather}
+              currentForecastWeather={currentForecastWeather}
+            />
+            <NextDaysWeather currentForecastWeather={currentForecastWeather} />
+          </>
         ))}
     </Container>
   );

@@ -1,6 +1,6 @@
 import { Stack, Typography, Box, Divider, useTheme } from "@mui/material";
-import dayjs, { Dayjs } from "dayjs";
-import { mpsToKmh } from "../helper";
+import dayjs from "dayjs";
+import { convertDate, mpsToKmh } from "../helper";
 import { TodayWeather } from "../@types/todayWeather";
 import TodayWeatherDetailCard from "./TodayWeatherDetailCard";
 import { ForecastWeather } from "../@types/forecastWeather";
@@ -12,15 +12,9 @@ type Props = {
 
 const TodayOverview = ({ currentWeather, currentForecastWeather }: Props) => {
   const theme = useTheme();
-  const convertDate = (date: Dayjs) => {
-    const formattedDate = `${date.date()} ${date.format("MMMM")} ${date.format(
-      "dddd"
-    )}`;
-    return formattedDate;
-  };
 
   return (
-    <Stack gap={2}>
+    <Stack gap={2} marginBottom={4}>
       <Typography variant="body1">Today Overview</Typography>
       <Stack flexDirection="row" gap={2}>
         <Box

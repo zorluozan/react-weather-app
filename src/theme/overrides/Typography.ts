@@ -29,7 +29,7 @@ export default function Typography(theme: Theme) {
             variant: "body2",
           },
           style: {
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: theme.typography.fontWeightRegular,
             color: theme.palette.primary.text,
           },
