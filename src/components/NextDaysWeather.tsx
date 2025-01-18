@@ -15,7 +15,7 @@ const NextDaysWeather = ({ currentForecastWeather }: Props) => {
 
   const uniqueDates = Array.from(
     new Set(
-      currentForecastWeather.map((item) =>
+      currentForecastWeather?.map((item) =>
         dayjs(item.dt * 1000).format("D MMM ddd")
       )
     )
@@ -27,42 +27,44 @@ const NextDaysWeather = ({ currentForecastWeather }: Props) => {
   );
 
   return (
-    <Stack gap={2}>
-      <Typography variant="body1">Next 5 days</Typography>
-      <Stack flexDirection="row" alignItems="center" gap={2}>
-        {["All Days", ...uniqueDates].map((item, index) => {
-          return (
-            <Button
-              key={index}
-              sx={{
-                backgroundColor:
-                  selectedDate === item
-                    ? theme.palette.primary.text
-                    : theme.palette.primary.tertiary,
-                color:
-                  selectedDate === item
-                    ? theme.palette.primary.tertiary
-                    : theme.palette.primary.text,
-                textTransform: "capitalize",
-              }}
-              onClick={() => {
-                setSelectedDate(item);
-              }}
-            >
-              {item}
-            </Button>
-          );
-        })}
+    currentForecastWeather?.length > 0 && (
+      <Stack gap={2}>
+        <Typography variant="body1">Next 5 days</Typography>
+        <Stack flexDirection="row" alignItems="center" gap={2}>
+          {["All Days", ...uniqueDates].map((item, index) => {
+            return (
+              <Button
+                key={index}
+                sx={{
+                  backgroundColor:
+                    selectedDate === item
+                      ? theme.palette.primary.text
+                      : theme.palette.primary.tertiary,
+                  color:
+                    selectedDate === item
+                      ? theme.palette.primary.tertiary
+                      : theme.palette.primary.text,
+                  textTransform: "capitalize",
+                }}
+                onClick={() => {
+                  setSelectedDate(item);
+                }}
+              >
+                {item}
+              </Button>
+            );
+          })}
+        </Stack>
+        <Grid container spacing={2}>
+          {(selectedDate === "All Days"
+            ? currentForecastWeather
+            : filteredWeather
+          )?.map((item: ForecastWeather, index: number) => {
+            return <ForecastWeatherCard item={item} key={index} />;
+          })}
+        </Grid>
       </Stack>
-      <Grid container spacing={2}>
-        {(selectedDate === "All Days"
-          ? currentForecastWeather
-          : filteredWeather
-        )?.map((item: ForecastWeather, index: number) => {
-          return <ForecastWeatherCard item={item} key={index} />;
-        })}
-      </Grid>
-    </Stack>
+    )
   );
 };
 
